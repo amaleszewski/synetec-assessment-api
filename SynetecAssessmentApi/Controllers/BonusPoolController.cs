@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace SynetecAssessmentApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class BonusPoolController : Controller
     {
@@ -16,7 +17,7 @@ namespace SynetecAssessmentApi.Controllers
             return Ok(await bonusPoolService.GetEmployeesAsync());
         }
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> CalculateBonus([FromBody] CalculateBonusDto request)
         {
             var bonusPoolService = new BonusPoolService();
