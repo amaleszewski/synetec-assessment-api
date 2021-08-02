@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SynetecAssessmentApi.Domain.SeedWork;
 
 namespace SynetecAssessmentApi.Domain
 {

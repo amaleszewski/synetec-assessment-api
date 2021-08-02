@@ -5,12 +5,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
       <PackageReference Include="MediatR" Version="9.0.0" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="BonusPool\CommandHandlers" />
       <Folder Include="BonusPool\Commands" />
+      <Folder Include="BonusPool\Requests" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SynetecAssessmentApi.Domain\SynetecAssessmentApi.Domain.csproj" />
     </ItemGroup>
 
 </Project>

@@ -4,7 +4,13 @@ using SynetecAssessmentApi.Application.BonusPool.Responses.GetAllEmployees;
 
 namespace SynetecAssessmentApi.Application.BonusPool.Queries
 {
-	public class GetAllEmployeesQuery : IQuery<IList<EmployeeResponse>>
+	public class GetAllEmployeesQuery : IQuery<List<EmployeeResponse>>
 	{
+		public GetAllEmployeesQuery(int companyId)
+		{
+			CompanyId = companyId;
+		}
+
+		public int CompanyId { get; }
 	}
 }

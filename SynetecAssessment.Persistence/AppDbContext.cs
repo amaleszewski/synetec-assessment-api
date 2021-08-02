@@ -6,7 +6,7 @@ namespace SynetecAssessmentApi.Persistence
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Department> Departments { get; set; }
+        // TODO: To delete
         public DbSet<Employee> Employees { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)

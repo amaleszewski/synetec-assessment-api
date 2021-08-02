@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SynetecAssessmentApi.Persistence;
@@ -14,7 +15,7 @@ namespace SynetecAssessmentApi
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<AppDbContext>();
+                var context = services.GetRequiredService<DbContext>();
 
                 DbContextGenerator.Initialize(services);
             }
