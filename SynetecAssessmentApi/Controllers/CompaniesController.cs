@@ -13,7 +13,6 @@ namespace SynetecAssessmentApi.Controllers
 {
     // TODO: Add unit tests
     // TODO: Write my remarks
-    // TODO: Connection string to appsettings?
     [ApiController]
     [Route("api/[controller]")]
     public class CompaniesController : Controller

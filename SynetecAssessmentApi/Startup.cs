@@ -10,13 +10,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SynetecAssessmentApi.Application.Abstraction.Repositories;
+using SynetecAssessmentApi.Application.Abstraction;
 using SynetecAssessmentApi.Application.Company.QueryHandlers;
 using SynetecAssessmentApi.Application.Company.Validators;
 using SynetecAssessmentApi.Application.Profiles;
 using SynetecAssessmentApi.Persistence;
-using SynetecAssessmentApi.Persistence.Repositories;
-using SynetecAssessmentApi.PipelineBehaviors;
 
 namespace SynetecAssessmentApi
 {
@@ -28,7 +26,7 @@ namespace SynetecAssessmentApi
         }
 
         public IConfiguration Configuration { get; }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -48,7 +46,17 @@ namespace SynetecAssessmentApi
 
             services.AddSwaggerGenNewtonsoftSupport();
             
-            services.AddScoped<ICompaniesRepository, CompaniesRepository>();
+            services.Scan(
+                a => a.FromApplicationDependencies()
+                    .AddClasses(c => c.AssignableTo(typeof(IRepository<>)))
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime());
+            
+            services.Scan(
+                a => a.FromApplicationDependencies()
+                    .AddClasses(c => c.AssignableTo(typeof(IPipelineBehavior<,>)))
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime());
             
             services.AddMediatR(typeof(GetAllEmployeesQueryHandler));
             
@@ -56,11 +64,7 @@ namespace SynetecAssessmentApi
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UpdateCompanyBonusPoolCommandValidator>());
 
             services.AddDbContextPool<DbContext, AppDbContext>(options =>
-                options.UseInMemoryDatabase(databaseName: "HrDb"));
-
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorCommandHandlerBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorQueryHandlerBehavior<,>));
+                options.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString("Database")));
 
             services.AddAutoMapper(typeof(MapperProfile));
         }
