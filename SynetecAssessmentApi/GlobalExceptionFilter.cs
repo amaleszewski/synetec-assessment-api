@@ -3,7 +3,6 @@ using FluentValidation.AspNetCore;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
 using SynetecAssessmentApi.Application.Abstraction.Exceptions;
 
 namespace SynetecAssessmentApi

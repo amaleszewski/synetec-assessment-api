@@ -12,11 +12,11 @@ namespace SynetecAssessmentApi.Application.Company.Responses.GetEmployeeBonus
 		
         public int Salary { get; private set; }
 
-        public int Bonus { get; private set; }
+        public decimal Bonus { get; private set; }
 
         public EmployeeBonusDepartmentResponse Department { get; private set; }
 
-        public void SetBonus(int bonus)
+        public void SetBonus(decimal bonus)
         {
             Bonus = bonus;
         }

@@ -1,6 +1,5 @@
 using System;
 using SynetecAssessmentApi.Application.Abstraction.Exceptions;
-using SynetecAssessmentApi.Domain;
 using SynetecAssessmentApi.Domain.SeedWork;
 
 namespace SynetecAssessmentApi.Persistence

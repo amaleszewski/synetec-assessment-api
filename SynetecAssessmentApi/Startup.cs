@@ -14,6 +14,7 @@ using SynetecAssessmentApi.Application.Abstraction;
 using SynetecAssessmentApi.Application.Company.QueryHandlers;
 using SynetecAssessmentApi.Application.Company.Validators;
 using SynetecAssessmentApi.Application.Profiles;
+using SynetecAssessmentApi.Domain.Abstraction;
 using SynetecAssessmentApi.Persistence;
 
 namespace SynetecAssessmentApi
@@ -55,6 +56,12 @@ namespace SynetecAssessmentApi
             services.Scan(
                 a => a.FromApplicationDependencies()
                     .AddClasses(c => c.AssignableTo(typeof(IPipelineBehavior<,>)))
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime());
+            
+            services.Scan(
+                a => a.FromApplicationDependencies()
+                    .AddClasses(c => c.AssignableTo(typeof(IDomainService)))
                     .AsImplementedInterfaces()
                     .WithTransientLifetime());
             
