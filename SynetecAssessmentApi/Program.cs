@@ -14,7 +14,6 @@ namespace SynetecAssessmentApi
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<AppDbContext>();
 
                 DbContextGenerator.Initialize(services);
             }
