@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using SynetecAssessmentApi.Domain;
 
 namespace SynetecAssessmentApi.Application.Abstraction.Repositories
 {
-    public interface ICompaniesRepository : IRepository<Company>
+    public interface ICompaniesRepository : IRepository<Domain.Company>
     {
         Task<List<TResponse>> GetAllEmployeesAsync<TResponse>(int companyId, CancellationToken cancellationToken)
             where TResponse : IResponse;

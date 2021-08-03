@@ -1,6 +1,6 @@
 using SynetecAssessmentApi.Application.Abstraction;
 
-namespace SynetecAssessmentApi.Application.BonusPool.Responses.GetCompanyBonusPool
+namespace SynetecAssessmentApi.Application.Company.Responses.GetCompanyBonusPool
 {
     public class GetCompanyBonusPoolResponse : IResponse
     {

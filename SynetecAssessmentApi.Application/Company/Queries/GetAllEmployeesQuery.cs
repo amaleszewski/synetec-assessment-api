@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using SynetecAssessmentApi.Application.Abstraction;
-using SynetecAssessmentApi.Application.BonusPool.Responses.GetAllEmployees;
+using SynetecAssessmentApi.Application.Company.Responses.GetAllEmployees;
 
-namespace SynetecAssessmentApi.Application.BonusPool.Queries
+namespace SynetecAssessmentApi.Application.Company.Queries
 {
 	public class GetAllEmployeesQuery : IQuery<List<EmployeeResponse>>
 	{

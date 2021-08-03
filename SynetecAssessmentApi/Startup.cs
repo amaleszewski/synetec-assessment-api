@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Reflection;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,10 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SynetecAssessmentApi.Application.Abstraction.Repositories;
-using SynetecAssessmentApi.Application.BonusPool.QueryHandlers;
+using SynetecAssessmentApi.Application.Company.QueryHandlers;
+using SynetecAssessmentApi.Application.Company.Validators;
 using SynetecAssessmentApi.Application.Profiles;
 using SynetecAssessmentApi.Persistence;
 using SynetecAssessmentApi.Persistence.Repositories;
+using SynetecAssessmentApi.PipelineBehaviors;
 
 namespace SynetecAssessmentApi
 {
@@ -34,16 +40,29 @@ namespace SynetecAssessmentApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SynetecAssessmentApi", Version = "v1" });
+                
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
+            services.AddSwaggerGenNewtonsoftSupport();
+            
             services.AddScoped<ICompaniesRepository, CompaniesRepository>();
             
             services.AddMediatR(typeof(GetAllEmployeesQueryHandler));
+            
+            services.AddMvcCore()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UpdateCompanyBonusPoolCommandValidator>());
 
             services.AddDbContextPool<DbContext, AppDbContext>(options =>
                 options.UseInMemoryDatabase(databaseName: "HrDb"));
 
-            services.AddAutoMapper(typeof(EmployeeProfile));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorCommandHandlerBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorQueryHandlerBehavior<,>));
+
+            services.AddAutoMapper(typeof(MapperProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

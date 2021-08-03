@@ -4,7 +4,7 @@ namespace SynetecAssessmentApi.Domain.SeedWork
 {
     public class AggregateRoot : Entity, IAggregateRoot
     {
-        public AggregateRoot(int id) : base(id)
+        protected AggregateRoot(int id) : base(id)
         {
         }
     }

@@ -12,5 +12,11 @@ namespace SynetecAssessmentApi.Application.Abstraction
         Task<TResponse> GetAsync<TResponse>(int key, CancellationToken cancellationToken) where TResponse : IResponse;
         
         Task<List<TResponse>> GetAllAsync<TResponse>(CancellationToken cancellationToken) where TResponse : IResponse;
+        
+        TAggregateRoot Add(TAggregateRoot aggregateRoot);
+		
+        TAggregateRoot Update(TAggregateRoot aggregateRoot);
+
+        TAggregateRoot Delete(TAggregateRoot aggregateRoot);
     }
 }

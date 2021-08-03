@@ -1,4 +1,6 @@
-using System.ComponentModel.DataAnnotations;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -18,6 +20,15 @@ namespace SynetecAssessmentApi
                         {
                             context.Exception.Message,
                         });
+                    context.ExceptionHandled = true;
+
+                    break;
+                case ValidationException validationException:
+                    var result = new ValidationResult(validationException.Errors);
+
+                    result.AddToModelState(context.ModelState, null);
+
+                    context.Result = new BadRequestObjectResult(context.ModelState);
                     context.ExceptionHandled = true;
 
                     break;

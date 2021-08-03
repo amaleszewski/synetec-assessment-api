@@ -1,6 +1,6 @@
 ﻿using SynetecAssessmentApi.Application.Abstraction;
 
-namespace SynetecAssessmentApi.Application.BonusPool.Responses.GetAllEmployees
+namespace SynetecAssessmentApi.Application.Company.Responses.GetAllEmployees
 {
 	public class DepartmentResponse : IResponse
 	{

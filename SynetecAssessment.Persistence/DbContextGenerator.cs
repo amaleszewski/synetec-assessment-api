@@ -14,7 +14,7 @@ namespace SynetecAssessmentApi.Persistence
             using var context = new AppDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<AppDbContext>>());
 
-            if (context.Employees.Any()) return;
+            if (context.Set<Employee>().Any()) return;
 
             SeedData(context);
         }

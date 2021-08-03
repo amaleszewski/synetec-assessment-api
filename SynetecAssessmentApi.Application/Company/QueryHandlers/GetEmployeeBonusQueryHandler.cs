@@ -2,11 +2,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using SynetecAssessmentApi.Application.Abstraction;
 using SynetecAssessmentApi.Application.Abstraction.Repositories;
-using SynetecAssessmentApi.Application.BonusPool.Queries;
-using SynetecAssessmentApi.Application.BonusPool.Responses.GetCompanyBonusPool;
-using SynetecAssessmentApi.Application.BonusPool.Responses.GetEmployeeBonus;
+using SynetecAssessmentApi.Application.Company.Queries;
+using SynetecAssessmentApi.Application.Company.Responses.GetCompanyBonusPool;
+using SynetecAssessmentApi.Application.Company.Responses.GetEmployeeBonus;
 
-namespace SynetecAssessmentApi.Application.BonusPool.QueryHandlers
+namespace SynetecAssessmentApi.Application.Company.QueryHandlers
 {
     public class GetEmployeeBonusQueryHandler : IQueryHandler<GetEmployeeBonusQuery, EmployeeBonusResponse>
     {
@@ -32,7 +32,7 @@ namespace SynetecAssessmentApi.Application.BonusPool.QueryHandlers
             var bonusPercentage = (decimal)employee.Salary / annualCompanyWages;
 
             //TODO: Rethink what details we want in singular employee response model
-            employee.SetAmount((int) (bonusPercentage * company.AnnualBonusPool));
+            employee.SetBonus((int) (bonusPercentage * company.AnnualBonusPool));
             
             return employee;
         }

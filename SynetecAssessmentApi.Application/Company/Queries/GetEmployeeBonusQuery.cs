@@ -1,7 +1,7 @@
 using SynetecAssessmentApi.Application.Abstraction;
-using SynetecAssessmentApi.Application.BonusPool.Responses.GetEmployeeBonus;
+using SynetecAssessmentApi.Application.Company.Responses.GetEmployeeBonus;
 
-namespace SynetecAssessmentApi.Application.BonusPool.Queries
+namespace SynetecAssessmentApi.Application.Company.Queries
 {
     public class GetEmployeeBonusQuery : IQuery<EmployeeBonusResponse>
     {

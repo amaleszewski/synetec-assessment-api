@@ -5,15 +5,15 @@ namespace SynetecAssessmentApi.Domain
 {
     public class Employee : Entity
     {
-        public string Fullname { get; set; }
-        public string JobTitle { get; set; }
-        public int Salary { get; set; }
+        public string Fullname { get; private set; }
+        public string JobTitle { get; private set; }
+        public int Salary { get; private set; }
 
         public int CompanyId { get; private set; }
 
-        public Company Company { get; set; }
-        public int DepartmentId { get; set; }
-        public Department Department { get; set; }
+        public Company Company { get; private set; }
+        public int DepartmentId { get; private set; }
+        public Department Department { get; private set; }
 
         public Employee(
             int id,

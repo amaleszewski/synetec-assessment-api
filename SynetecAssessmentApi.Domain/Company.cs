@@ -18,5 +18,10 @@ namespace SynetecAssessmentApi.Domain
         public int AnnualBonusPool { get; private set; }
 
         public IReadOnlyCollection<Employee> Employees => _employees.AsReadOnly();
+
+        public void ChangeAnnualBonusPool(int bonusPool)
+        {
+            AnnualBonusPool = bonusPool;
+        }
     }
 }

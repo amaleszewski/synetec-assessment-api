@@ -26,13 +26,7 @@ namespace SynetecAssessmentApi.Persistence
 		protected IQueryable<TAggregateRoot> ReadWriteEntitySet => WithIncludes(Context.Set<TAggregateRoot>());
 
 		protected IQueryable<TAggregateRoot> ReadOnlyEntitySet => Context.Set<TAggregateRoot>().AsNoTracking();
-
-		/// <summary>
-		/// Throws error if the specified item does not exist 
-		/// </summary>
-		/// <param name="key">The unique identifier</param>
-		/// <param name="cancellationToken">The cancellation token</param>
-		/// <returns>Entity</returns>
+		
 		public Task<TAggregateRoot> GetAsync(
 			int key, CancellationToken cancellationToken)
 		{
