@@ -11,8 +11,6 @@ using SynetecAssessmentApi.Application.Company.Responses.GetEmployeeBonus;
 
 namespace SynetecAssessmentApi.Controllers
 {
-    // TODO: Add unit tests
-    // TODO: Write my remarks
     [ApiController]
     [Route("api/[controller]")]
     public class CompaniesController : Controller
